@@ -38,12 +38,21 @@ GamePlayManager = {
 
         game.load.spritesheet('booble1','assets/images/booble1.png');
         game.load.spritesheet('booble2','assets/images/booble2.png');
+        
+        game.load.spritesheet('play','assets/images/play.png');
+
 
     },
     create: function() {
 
         console.log("create");
         game.add.sprite(0,0,'background');  /* (cordanadaX,cordenadaY,'Id') */
+        //this.play = game.add.sprite(0, 0,'play');
+        //this.play.anchor.setTo(0.5);
+        //this.play.x = game.width/2;
+        //this.play.y = game.height/2-200;
+        //this.horse.visible=false;
+        //this.play.visible=true;
 
         this.bobleArray = [];
         for (let i = 0; i < AMOUNT_BOOBLES; i++) {
@@ -75,6 +84,15 @@ GamePlayManager = {
         // this.horse.angle = 0/* 90 */; //rotar en grados el png
         // this.horse.scale.setTo(2);//escalado//tambien se puede escalar en su cordenada (1,2);
         // this.horse.alpha = 0.5;//trasparencia del horse de 0 a 1 
+
+
+        this.play = game.add.sprite(0,0,'play');
+        this.play.anchor.setTo(0.5);
+        this.play.x= game.width/2;
+        this.play.y= game.height/2;
+        this.play.visible=true;
+
+
 
         game.input.onDown.add(this.onTap, this);
 
@@ -250,6 +268,10 @@ GamePlayManager = {
     },
     onTap: function(){
 
+        //this.play.visible=flase;
+        this.play.visible=false;
+
+
         if (!this.flagFirstMouseDown) {
             this.tweenMollusk = game.add.tween(this.mollusk.position).to({
                 y:-0.001
@@ -397,7 +419,10 @@ GamePlayManager = {
 
         
 
-    }
+    },
+    replay:function(){
+
+    },
 }
 
 var game = new Phaser.Game(1136, 640, Phaser.CANVAS);
