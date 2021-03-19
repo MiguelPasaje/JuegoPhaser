@@ -39,7 +39,9 @@ GamePlayManager = {
         game.load.spritesheet('booble1','assets/images/booble1.png');
         game.load.spritesheet('booble2','assets/images/booble2.png');
         
-        game.load.spritesheet('play','assets/images/play.png');
+        //game.load.spritesheet('play','assets/images/play.png');
+        game.load.image('btnPlay','assets/images/play.png');       
+
 
 
     },
@@ -86,13 +88,11 @@ GamePlayManager = {
         // this.horse.alpha = 0.5;//trasparencia del horse de 0 a 1 
 
 
-        this.play = game.add.sprite(0,0,'play');
-        this.play.anchor.setTo(0.5);
-        this.play.x= game.width/2;
-        this.play.y= game.height/2;
-        this.play.visible=true;
-
-
+        /* this.play = game.add.sprite(0,0,'play'); */
+        /* this.play.anchor.setTo(0.5); */
+        /* this.play.x= game.width/2; */
+        /* this.play.y= game.height/2; */
+        /* this.play.visible=true; */
 
         game.input.onDown.add(this.onTap, this);
 
@@ -223,6 +223,18 @@ GamePlayManager = {
         },this);
 
 
+        /* txt INICIAR JUEGO       */
+        
+        this.txt_iniciar =  game.add.text(game.width/2, game.height/2, 'CLIK PARA INICIAR JUEGO',{
+            font:'bold 24px sans-serif',
+            fill:'#001BFF',
+            align:' center'
+        });
+        this.txt_iniciar.anchor.setTo(0.5);
+        this.txt_iniciar.visible = true;
+        /* fin txt iniciar juego */
+
+
 
     },
     increaseScore:function(){
@@ -250,7 +262,7 @@ GamePlayManager = {
         var bgAlpha = game.add.bitmapData(game.width, game.height);
         bgAlpha.ctx.fillStyle = '#000';
         bgAlpha.ctx.fillRect(0,0,game.width,game.height);
-        var bg = game.add.sprite(0,0,bgAlpha);        
+        var bg = game.add.sprite(0,0,bgAlpha); 
         bg.alpha = 0.5;//opacidad
 
         var style={
@@ -260,16 +272,18 @@ GamePlayManager = {
         }
 
 
-        this.textFieldFinalMsg = game.add.text(game.width/2, game.height/2, msg, style);
+        this.textFieldFinalMsg = game.add.text(game.width/2, game.height/2-100, msg, style);
         this.textFieldFinalMsg.anchor.setTo(0.5);
         this.tweenMollusk.stop();
 
+        this.replay();
         
     },
+
     onTap: function(){
 
         //this.play.visible=flase;
-        this.play.visible=false;
+        this.txt_iniciar.visible=false;
 
 
         if (!this.flagFirstMouseDown) {
@@ -421,8 +435,16 @@ GamePlayManager = {
 
     },
     replay:function(){
+        var btnPlay = this.add.button(game.width/2, game.height/2,'btnPlay',this.iniciarJuego,this,);
+        btnPlay.anchor.setTo(0.5);
 
     },
+    iniciarJuego:function(){
+        console.log("btn play aa")
+        //game.state.add("gameplay", GamePlayManager);
+        game.state.start("gameplay");
+    }
+
 }
 
 var game = new Phaser.Game(1136, 640, Phaser.CANVAS);
