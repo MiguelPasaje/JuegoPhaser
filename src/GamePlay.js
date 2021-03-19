@@ -223,7 +223,7 @@ GamePlayManager = {
         },this);
 
 
-        /* txt INICIAR JUEGO       */
+        /* txt INICIAR JUEGO --- */
         
         this.txt_iniciar =  game.add.text(game.width/2, game.height/2, 'CLIK PARA INICIAR JUEGO',{
             font:'bold 24px sans-serif',
